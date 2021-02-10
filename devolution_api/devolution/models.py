@@ -1,8 +1,6 @@
 from django.db import models
-from datetime import datetime
 
 # Create your models here.
-
 class DevolutionReason(models.Model):
     title = models.CharField(max_length=100, null=False, blank=False)
     description = models.CharField(max_length=200, null=False, blank=False)
@@ -29,7 +27,7 @@ class Devolution(models.Model):
         DevolutionStatus,
         on_delete=models.RESTRICT
     )
-    date = models.DateField(default=datetime.today)
+    date = models.DateField(auto_now_add=True)
     buyer_reason = models.CharField(max_length=100, null=False, blank=False)
 
 
@@ -39,8 +37,8 @@ class DevolutionProductOrder(models.Model):
         Devolution,
         on_delete=models.RESTRICT
     )
-    id_devolution_reason = models.ForeignKey(
-        DevolutionReason,
+    id_devolution_status = models.ForeignKey(
+        DevolutionStatus,
         on_delete=models.RESTRICT
     )
 
